@@ -30,12 +30,12 @@ const Publish = (props) => {
               const response = await axios.post(
                 "https://leboncoin-api.herokuapp.com/offer/publish",
 
-                {
-                  headers: {
-                    Authorization: "Bearer  ${token}",
-                    "Content-Type": "multipart/form-data",
-                  },
-                },
+                // {
+                //   headers: {
+                //     Authorization: "Bearer  ${token}",
+                //     "Content-Type": "multipart/form-data",
+                //   },
+                // },
 
                 {
                   title: title,

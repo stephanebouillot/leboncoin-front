@@ -6,8 +6,8 @@ import axios from "axios";
 
 const Filters = () => {
   // let history = useHistory();
-  const [loading, setLoading] = useState(true);
-  const [count, setCount] = useState(0);
+  // const [loading, setLoading] = useState(true);
+  // const [count, setCount] = useState(0);
   const [offers, setOffers] = useState([]);
 
   const [title, setTitle] = useState("");
@@ -68,9 +68,9 @@ const Filters = () => {
                 // console.log(response.data);
 
                 setOffers(response.data.offers);
-                setCount(response.data.count);
+                // setCount(response.data.count);
 
-                setLoading(false);
+                // setLoading(false);
                 // Cookies.set("token", response.data.token);
                 // history.push("/");
                 // props.onLogIn();import {Link} from "react-router-dom";
