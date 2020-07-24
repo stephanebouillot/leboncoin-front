@@ -51,9 +51,7 @@ const LogIn = (props) => {
           <h2>Connexion</h2>
 
           <div className="formline" />
-          <label className="labellogin" for="email">
-            Adresse email
-          </label>
+          <label className="labellogin">Adresse email</label>
           <input
             className="saisieform"
             placeholder=""
@@ -62,9 +60,7 @@ const LogIn = (props) => {
               setEmail(event.target.value);
             }}
           />
-          <label className="labellogin" for="password">
-            Mot de passe
-          </label>
+          <label className="labellogin">Mot de passe</label>
           <input
             className="saisieform"
             placeholder=""

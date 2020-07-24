@@ -62,14 +62,14 @@ main {
 }
 .blocsearch {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   justify-content: center;
   background-color: white;
   border-radius: 10px;
   box-shadow: 0px 3px 10px rgb(247, 247, 247);
 
-  padding: 20px;
-  margin: 0 100px;
+  /* padding: 20px;
+  margin: 0 100px; */
   margin-top: -50px;
 }
 .blocrecherche {
@@ -316,6 +316,11 @@ main {
 
 .button-current-page {
   color: #ff6e14;
+}
+.Current-page {
+  display: flex;
+  padding-top: 20px;
+  justify-content: center;
 }
 
 .chevron {
@@ -648,7 +653,6 @@ main {
 }
 .saisieformtexte {
   display: flex;
-
   height: 150px;
   border-radius: 5px;
   border: 0.5px solid rgba(220, 221, 223);

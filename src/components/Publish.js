@@ -1,18 +1,18 @@
 import React, { useState } from "react";
 
-// import { useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
 import axios from "axios";
 
-import Cookies from "js-cookie";
+// import Cookies from "js-cookie";
 
 const Publish = (props) => {
-  //   let history = useHistory();
+  let history = useHistory();
 
   const [title, setTitle] = useState("");
-  const [announce, setAnnounce] = useState("");
+  const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
-  //   const [picture, setPicture] = useState("");
+  const [picture, setPicture] = useState("");
 
   return (
     <>
@@ -22,30 +22,39 @@ const Publish = (props) => {
           onSubmit={async (event) => {
             event.preventDefault();
 
-            if (title === "" || announce === "" || price === "") {
+            if (title === "" || description === "" || price === "") {
               alert("Veulliez remplir tout les champs");
             }
 
             try {
               const response = await axios.post(
-                "https://leboncoin-api.herokuapp.com/user/publish",
+                "https://leboncoin-api.herokuapp.com/offer/publish",
+
+                {
+                  headers: {
+                    Authorization: "Bearer  ${token}",
+                    "Content-Type": "multipart/form-data",
+                  },
+                },
+
                 {
                   title: title,
-                  announce: announce,
+                  description: description,
                   price: price,
-                  //   picture: picture,
+                  picture: picture,
+                  created: new Date(),
                 }
               );
               if (response.data.token) {
-                Cookies.set("token", response.data.token);
-                // history.push("/");
+                // Cookies.set("token", response.data.token);
+                history.push("/");
                 props.onLogIn();
               } else {
                 alert("Error");
               }
-            } catch (err) {
+            } catch (error) {
               console.error("Error");
-              if (err.response.data.error === "Unauthorized") {
+              if (error.response.data.error === "Unauthorized") {
                 alert("veuillez vous connecter pour deposer une annonce");
               }
             }
@@ -53,52 +62,54 @@ const Publish = (props) => {
         >
           <h2 className="titrepublish">Deposer une annonce</h2>
           <div className="formlinepublish" />
-          <label className="labeltitreannonce">Titre de l'annonce *</label>
+          <label className="labeltitreannonce">
+            Titre de l'annonce *{props.title}
+          </label>
           <input
             className="saisieform"
             placeholder=""
             type="text"
+            value={props.title}
             onChange={(event) => {
               setTitle(event.target.value);
             }}
           />
-          <label className="labellogin">Texte de l'annonce *</label>
+          <label className="labellogin">
+            Texte de l'annonce *{props.description}
+          </label>
           <input
+            type="textarea"
             className="saisieformtexte"
             placeholder=""
-            type="text"
+            value={props.description}
             onChange={(event) => {
-              setAnnounce(event.target.value);
+              setDescription(event.target.value);
             }}
           />
-          <label className="labelprix">Prix *</label>
+          <label className="labelprix">Prix *{props.price}</label>
 
           <input
             className="saisieformprix"
             placeholder=""
             type="number"
+            value={props.price}
             onChange={(event) => {
               setPrice(event.target.value);
             }}
           />
           <span>€</span>
 
-          {/* <label className="labellogin">Photo *</label>
+          <label className="labellogin">Photo *{props.picture}</label>
           <input
             className="saisieform"
             placeholder=""
-            type="password"
+            type="file"
+            value={props.picture}
             onChange={(event) => {
               setPicture(event.target.value);
             }}
-          /> */}
-          <button
-            className="buttonlogin"
-            name="submit"
-            type="submit"
-            id="contact-submit"
-            data-submit="...Sending"
-          >
+          />
+          <button className="buttonlogin" name="submit" type="submit">
             Valider
           </button>
         </form>
@@ -108,3 +119,6 @@ const Publish = (props) => {
 };
 
 export default Publish;
+// Headers :
+// "Authorization": "Bearer ${token}"
+//  "Content-Type": "multipart/form-data"

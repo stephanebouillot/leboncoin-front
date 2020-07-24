@@ -31,7 +31,11 @@ function App() {
             </Route>
 
             <Route path="/publish">
-              <Publish />
+              <Publish
+                onLogIn={() => {
+                  setLoggedIn(true);
+                }}
+              />
             </Route>
 
             <Route path="/offer/:id">

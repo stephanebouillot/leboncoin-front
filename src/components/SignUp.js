@@ -98,8 +98,8 @@ const SignUp = (props) => {
                 console.log(response.data);
                 alert("Error");
               }
-            } catch (err) {
-              console.error(err.response.data);
+            } catch (error) {
+              console.error(error.response.data);
             }
           }}
           className="registerform"

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import { Link } from "react-router-dom";
+import Filters from "./Filters";
 
 import NavBas from "./NavBas";
 import axios from "axios";
@@ -25,8 +26,10 @@ const Offers = (props) => {
             },
           }
         );
+
         setOffers(response.data.offers);
         setCount(response.data.count);
+
         setLoading(false);
       } catch (err) {
         console.error("Error");
@@ -49,41 +52,10 @@ const Offers = (props) => {
       <div className="ellipsebis"></div>
       <div className="content">
         <div className="blocsearch">
-          <div className="blocrecherche">
-            <input
-              className="input"
-              type="text"
-              placeholder="Que recherchez vous ?"
-            ></input>
-            <button className="button-search" type="submit">
-              Rechercher
-            </button>
-          </div>
-          <div className="criteres">
-            Prix entre
-            <input
-              className="prixmini"
-              type="text"
-              placeholder="prix mini"
-            ></input>{" "}
-            et
-            <input
-              className="prixmini"
-              type="text"
-              placeholder="prix max"
-            ></input>
-            <form>
-              <select className="menuchoix" name="nom" size="0">
-                <option> Tri : Plus recent </option>
-                <option>Tri : Moins recent </option>
-                <option>Tri : Moins cher </option>
-                <option>Tri : Plus cher </option>
-              </select>
-            </form>
-          </div>
+          <Filters />
         </div>
 
-        <div className="Current page">
+        <div className="Current-page">
           Page {page}/{Math.ceil(count / offersByPage)}
         </div>
 
