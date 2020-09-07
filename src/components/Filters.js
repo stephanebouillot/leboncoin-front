@@ -68,12 +68,6 @@ const Filters = () => {
                 // console.log(response.data);
 
                 setOffers(response.data.offers);
-                // setCount(response.data.count);
-
-                // setLoading(false);
-                // Cookies.set("token", response.data.token);
-                // history.push("/");
-                // props.onLogIn();import {Link} from "react-router-dom";
               } else {
                 alert("Error");
               }

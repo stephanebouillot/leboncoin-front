@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import LogIn from "./components/LogIn";
 import SignUp from "./components/SignUp";
 import Publish from "./components/Publish";
+import Payment from "./components/Payment";
 
 import "./App.css";
 
@@ -32,6 +33,13 @@ function App() {
 
             <Route path="/publish">
               <Publish
+                onLogIn={() => {
+                  setLoggedIn(true);
+                }}
+              />
+            </Route>
+            <Route path="/payment">
+              <Payment
                 onLogIn={() => {
                   setLoggedIn(true);
                 }}

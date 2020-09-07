@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useHistory } from "react-router-dom";
 
 import axios from "axios";
 
 const Offer = (props) => {
   const [loading, setLoading] = useState(true);
   const [offer, setOffer] = useState({});
-
+  let history = useHistory();
   const { id } = useParams();
 
   useEffect(() => {
@@ -50,7 +50,18 @@ const Offer = (props) => {
       <div className="userpanier">
         <div className="username">{offer.creator.account.username}</div>
         <div className="panierline" />
-        <button className="button-panier" type="submit">
+        <button
+          className="button-panier"
+          type="submit"
+          onClick={() =>
+            history.push("/payment", {
+              productId: offer._id,
+              img: offer.picture.secure_url,
+              title: offer.title,
+              price: offer.price,
+            })
+          }
+        >
           <i class="fa fa-shopping-cart" aria-hidden="true"></i> Acheter
         </button>
       </div>

@@ -215,7 +215,7 @@ main {
 .annonces {
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  /* padding: 20px; */
 }
 
 .annonces a {
@@ -677,4 +677,77 @@ main {
   display: flex;
   /* flex-direction: row; */
   font-weight: 600;
+}
+.checkout {
+  text-align: center;
+  width: 300px;
+}
+
+.checkout p,
+.payment-card span {
+  margin-bottom: 20px;
+  font-weight: 700;
+}
+
+.checkout button {
+  margin-top: 30px;
+  outline: none;
+  height: 44px;
+  width: 230px;
+  font-weight: 700;
+  font-size: 16px;
+  color: white;
+  background-color: #f56b2a;
+  border-radius: 5px;
+}
+
+.payment-confirmed {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.payment-confirmed img {
+  margin-top: 20px;
+}
+.payment-confirmed > span {
+  margin: 20px 0;
+}
+.payment-container {
+  display: flex;
+  height: 90vh;
+  justify-content: center;
+  align-items: center;
+}
+.payment-card {
+  background-color: white;
+  display: flex;
+  padding: 30px;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 600px;
+  width: 50%;
+  margin: auto;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.payment-summary {
+  text-align: center;
+  font-weight: 700;
+}
+
+.payment-summary > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.payment-summary > div > p:last-child {
+  color: #f56b2a;
+  margin: 0;
+}
+
+.payment-summary img {
+  width: 150px;
+  object-fit: contain;
 }

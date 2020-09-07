@@ -3,16 +3,18 @@ import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 
 import axios from "axios";
-
-// import Cookies from "js-cookie";
+import Cookies from "js-cookie";
 
 const Publish = (props) => {
   let history = useHistory();
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("");
-  const [picture, setPicture] = useState("");
+  const [price, setPrice] = useState(0);
+  const [file, setFile] = useState({});
+
+  const Token = Cookies.get("token");
+  // "2Y3XdUasPO13lBK3GmyKCl1kGdS4p3g25AFt2NqE0qA8vCvjCg4GFRDldQFBuCjk";
 
   return (
     <>
@@ -22,41 +24,39 @@ const Publish = (props) => {
           onSubmit={async (event) => {
             event.preventDefault();
 
+            const formData = new FormData();
+            formData.append("file", file);
+            formData.append("title", title);
+            formData.append("price", price);
+            formData.append("description", description);
+
             if (title === "" || description === "" || price === "") {
-              alert("Veulliez remplir tout les champs");
+              alert("Veuillez remplir tout les champs");
             }
 
             try {
               const response = await axios.post(
                 "https://leboncoin-api.herokuapp.com/offer/publish",
-
-                // {
-                //   headers: {
-                //     Authorization: "Bearer  ${token}",
-                //     "Content-Type": "multipart/form-data",
-                //   },
-                // },
+                formData,
 
                 {
-                  title: title,
-                  description: description,
-                  price: price,
-                  picture: picture,
-                  created: new Date(),
+                  headers: {
+                    Authorization: "Bearer " + Token,
+                    "Content-Type": "multipart/form-data",
+                  },
                 }
               );
+              console.log(response);
               if (response.data.token) {
                 // Cookies.set("token", response.data.token);
-                history.push("/");
-                props.onLogIn();
-              } else {
-                alert("Error");
+                history.push(`/offer/${response.data._id}`);
               }
             } catch (error) {
               console.error("Error");
-              if (error.response.data.error === "Unauthorized") {
-                alert("veuillez vous connecter pour deposer une annonce");
-              }
+
+              // if (error.response.data.error === "Unauthorized") {
+              //   alert("veuillez vous connecter pour deposer une annonce");
+              // }
             }
           }}
         >
@@ -99,14 +99,14 @@ const Publish = (props) => {
           />
           <span>€</span>
 
-          <label className="labellogin">Photo *{props.picture}</label>
+          <label className="labellogin">Photo *{props.file}</label>
           <input
             className="saisieform"
             placeholder=""
             type="file"
-            value={props.picture}
+            // value={props.file}
             onChange={(event) => {
-              setPicture(event.target.value);
+              setFile(event.target.files[0]);
             }}
           />
           <button className="buttonlogin" name="submit" type="submit">

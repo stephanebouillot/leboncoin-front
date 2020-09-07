@@ -74,7 +74,6 @@ const LogIn = (props) => {
             className="buttonlogin"
             name="submit"
             type="submit"
-            id="contact-submit"
             data-submit="...Sending"
           >
             Se connecter
@@ -87,7 +86,6 @@ const LogIn = (props) => {
           <button
             className="buttonsignup"
             name="submit"
-            id="contact-submit"
             onClick={() => {
               history.push("/signup");
             }}
